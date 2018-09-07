@@ -6,7 +6,8 @@ import router from './router'
 import axios from 'axios'
 import FastClick from 'fastclick'
 
-
+import Echarts from "vue-echarts/components/Echarts"
+import 'echarts/theme/dark'
 
 
 
