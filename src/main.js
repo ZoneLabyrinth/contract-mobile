@@ -3,22 +3,37 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import axios from 'axios'
+import axios from '@/api/http.js'
 import FastClick from 'fastclick'
+import * as filters from './utils/filters'
 
 import Echarts from "vue-echarts/components/Echarts"
 import 'echarts/theme/dark'
 
+import {
+  ToastPlugin,
+  LoadingPlugin,
+  ConfirmPlugin,
+  DatetimePlugin
+} from 'vux'
 
 
 FastClick.attach(document.body)
 Vue.config.productionTip = false
 Vue.prototype.axios = axios
 
+//默认使用vux组件
+Vue.use(ToastPlugin)
+Vue.use(LoadingPlugin)
+Vue.use(ConfirmPlugin)
+Vue.use(DatetimePlugin)
+
+Object.keys(filters).forEach(key => Vue.filter(key, filters[key]))
+
+
 /* eslint-disable no-new */
-new Vue({
+export const vm = new Vue({
   el: '#app',
   router,
-  components: { App },
-  template: '<App/>'
-})
+  render: h => h(App)
+}).$mount('#app')

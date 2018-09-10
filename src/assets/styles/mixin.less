@@ -1,0 +1,17 @@
+@charset 'UTF-8';
+
+.flex(@align:center, @justify:center, @dir:row, @wrap:nowrap){
+    display: flex;
+    align-items: @align;
+    justify-content: @justify;
+    flex-direction: @dir;
+    flex-wrap: @wrap       
+}
+
+.wh(@w,@h){
+    width: @w;
+    height: @h;
+}
+.borderRadios(@w:.15rem){
+    border-radius: @w;
+}

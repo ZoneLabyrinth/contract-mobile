@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <app-header></app-header>
     <div class="view">
       <router-view></router-view>
     </div>
@@ -7,21 +8,27 @@
 </template>
 
 <script>
+import AppHeader from '@/components/nav'
 export default {
-  name: "App"
+  name: "App",
+  components:{
+    AppHeader
+  }
 };
 </script>
 
-<style lang="scss">
+<style lang="less">
 /* @import "~vux/src/styles/reset.scss"; */
-@import "./assets/styles/reset.scss";
+@import "./assets/styles/reset.less";
+@import "~vux/src/styles/1px.less";
+
 
 body {
   background-color: #fff;
 }
 .view {
-  $diff:2.5rem;
-  height: calc(100vh - #{$diff});
+  @diff:2.2rem;
+  height: calc(~'100vh - @{diff}');
   overflow-y: auto;
   
 }
