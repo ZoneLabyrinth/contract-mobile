@@ -6,7 +6,11 @@
          <span>用户名</span>
        </p>
      </div>
-     <text-panel></text-panel>
+     <text-panel>
+       <p slot="chart">
+         <e-charts :options="pie"></e-charts>
+       </p>
+     </text-panel>
 
 
   </div>
@@ -14,9 +18,12 @@
 
 <script>
 import TextPanel from '@/components/Textpanel'
+import { pie } from '@/assets/js/pie'
+console.log(pie)
 export default {
   data () {
     return {
+      pie,
     };
   },
 
@@ -30,7 +37,7 @@ export default {
 }
 
 </script>
-<style lang='less' scoped>
+<style lang='less'>
 @import url('../../assets/styles/mixin.less');
 .contract-wrapper{
   .wh(100%,100%);

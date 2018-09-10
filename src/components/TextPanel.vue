@@ -1,13 +1,19 @@
 <template>
   <div class="text-wrapper">
-      <div class="title">
+      <div class="title" v-if="data.title">
           合同应收
       </div>
-      <div class="content">
-          <p v-for="(item,index) in data" :key="index">
+      <div class="content" ref="content">
+          <p v-for="(item,index) in data.arr" :key="index">
              <span>{{item.amount | formatCash}}</span> 
              <span>{{item.name}}</span>
-             <u></u>
+             <span>
+               <e-charts :options="pie"></e-charts>
+             </span>
+             <span>
+               {{item.percent}}
+             </span>
+             <u :style="{'left':left}"></u>
           </p>
           <slot name="chart"></slot>
       </div>
@@ -15,25 +21,48 @@
 </template>
 
 <script>
+import { pie } from "@/assets/js/pie";
 export default {
   data() {
-    return {};
+    return {
+      isMounted: false
+    };
   },
   props: {
     data: {
-      type: Array,
+      type: Object,
       default: function() {
         let arr = [
-          { name: "合同金额", amount: 888888 },
-          { name: "合同金额", amount: 888888 },
-        //   { name: "合同金额", amount: 888888 },
+          { name: "合同金额", amount: 888888 }
+          // { name: "合同金额", amount: 888888 },
+          // { name: "合同金额", amount: 888888 },
         ];
-        return arr;
+        let obj = {
+          title: "",
+          arr
+        };
+        return obj;
       }
     }
   },
 
-  mounted() {},
+  computed: {
+    left() {
+      // let arr = this.$refs;
+      if (this.isMounted) {
+        switch (this.$refs.content.children.length) {
+          case 2:
+            return "5.5rem";
+          case 3:
+            return "4rem";
+        }
+      }
+    }
+  },
+
+  mounted() {
+    this.isMounted = true;
+  },
 
   methods: {},
 
@@ -44,7 +73,7 @@ export default {
 @import url("../assets/styles/mixin.less");
 .text-wrapper {
   margin: 0.45rem;
-  padding: 1rem 0;
+  padding: 0.7rem 0;
   background: #fff;
   .borderRadios();
   .title {
@@ -71,23 +100,27 @@ export default {
       span:first-child {
         font-size: 0.9rem;
       }
-      span:nth-child(2){
+      span:nth-child(2) {
         padding-top: 0.75rem;
         font-weight: 100;
         font-size: 0.6rem;
       }
-      u{
-          position: absolute;
-          height: 100%;
-          width: 1px;
-          background: #ccc;
-          left: 140%;
+      u {
+        position: absolute;
+        height: 100%;
+        width: 1px;
+        background: #ccc;
+        left: 140%;
       }
     }
-    p:last-child{
-        u{
-            display: none;
-        }
+    p:last-child {
+      u {
+        display: none;
+      }
+    }
+    .echarts {
+      width: 5rem;
+      height: 5rem;
     }
   }
 }

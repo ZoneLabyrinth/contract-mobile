@@ -8,6 +8,8 @@ import FastClick from 'fastclick'
 import * as filters from './utils/filters'
 
 import Echarts from "vue-echarts/components/Echarts"
+
+import 'echarts/lib/chart/pie'
 import 'echarts/theme/dark'
 
 import {
@@ -27,6 +29,9 @@ Vue.use(ToastPlugin)
 Vue.use(LoadingPlugin)
 Vue.use(ConfirmPlugin)
 Vue.use(DatetimePlugin)
+
+
+Vue.component('e-charts',Echarts)
 
 Object.keys(filters).forEach(key => Vue.filter(key, filters[key]))
 
