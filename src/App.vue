@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <app-header></app-header>
+    <app-header :nav="isContract?contract:detail" :show="isContract?false:true"></app-header>
     <div class="view">
       <router-view></router-view>
     </div>
@@ -11,8 +11,29 @@
 import AppHeader from '@/components/nav'
 export default {
   name: "App",
+  data(){
+    return {
+      isContract:true,
+      contract:[
+            { url: '/normal', name: '正常合同'},
+            { url: '/termination', name: '合同终止'},
+            { url: '/pause', name: '合同暂停'},
+            { url: '/total', name: '合计'}
+      ],
+      detail:[
+            { url: '/before', name: '2016以前'},
+            { url: '/after', name: '2016'},
+            { url: '/last', name: '2017'},
+            { url: '/year', name: '2018'}
+      ]
+    }
+  },
   components:{
     AppHeader
+  },
+  mounted(){
+    this.isContract = false
+
   }
 };
 </script>

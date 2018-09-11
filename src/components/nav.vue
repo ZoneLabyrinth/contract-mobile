@@ -1,11 +1,15 @@
 <template>
-    <tab class="re-tab">
-        <tab-item v-for="(item,index) in nav" :key="index" :selected="$route.path === item.url"  @on-item-click="OnItemClick(item)">{{item.name}}</tab-item>
-    </tab>
+    <div class="nav-wrapper">
+        <quick-searching v-if="show"></quick-searching>
+        <tab class="re-tab">
+            <tab-item v-for="(item,index) in nav" :key="index" :selected="$route.path === item.url"  @on-item-click="OnItemClick(item)">{{item.name}}</tab-item>
+        </tab>
+    </div>
 </template>
 
 <script>
 import { Tab, TabItem } from 'vux'
+import QuickSearching from '@/components/QuickSearching'
 export default {
   data () {
     return {
@@ -14,15 +18,11 @@ export default {
   props:{
     nav:{
       type:Array,
-      default:function(){
-          let arr = [
-            { url: '/normal', name: '正常合同'},
-            { url: '/termination', name: '合同终止'},
-            { url: '/pause', name: '合同暂停'},
-            { url: '/total', name: '合计'}
-        ]
-          return arr
-      }
+      required:true
+    },
+    show:{
+        type:Boolean,
+        default:false
     }
   },  
   mounted(){},
@@ -32,10 +32,10 @@ export default {
           this.$router.push(item.url)
       }
   },
-
   components: {
       Tab,
-      TabItem
+      TabItem,
+      QuickSearching
   },
 }
 

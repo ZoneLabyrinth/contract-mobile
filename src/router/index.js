@@ -8,6 +8,10 @@ export default new Router({
     {
       path: '/normal',
       component:()=>import('@/views/department/normal')
+    },
+    {
+      path:'/before',
+      component:()=>import("@/views/detail/department")
     }
   ],
   linkActiveClass: 'active'

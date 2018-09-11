@@ -8,7 +8,7 @@
              <span>{{item.amount | formatCash}}</span> 
              <span>{{item.name}}</span>
              <span>
-               <e-charts :options="pie"></e-charts>
+               <e-charts :options="chart[index]"></e-charts>
              </span>
              <span>
                {{item.percent}}
@@ -21,11 +21,13 @@
 </template>
 
 <script>
-import { pie } from "@/assets/js/pie";
+import { pie } from "@/assets/js/pie.js";
+// console.log(pie0)
 export default {
   data() {
     return {
-      isMounted: false
+      isMounted: false,
+      chart:[pie]
     };
   },
   props: {
@@ -39,7 +41,7 @@ export default {
         ];
         let obj = {
           title: "",
-          arr
+          arr,
         };
         return obj;
       }
@@ -57,14 +59,15 @@ export default {
             return "4rem";
         }
       }
-    }
+    },
   },
 
   mounted() {
     this.isMounted = true;
   },
 
-  methods: {},
+  methods: {
+  },
 
   components: {}
 };

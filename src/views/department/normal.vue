@@ -1,22 +1,17 @@
 <template>
   <div class="contract-wrapper">
-     <div class="user-info">
-       <p>
-         <i class="iconfont icon-user"></i>
-         <span>用户名</span>
-       </p>
-     </div>
+    <user-info :name="name"></user-info>
      <text-panel>
        <p slot="chart">
          <e-charts :options="pie"></e-charts>
        </p>
      </text-panel>
 
-
   </div>
 </template>
 
 <script>
+import UserInfo from "@/components/UserInfo";
 import TextPanel from '@/components/Textpanel'
 import { pie } from '@/assets/js/pie'
 console.log(pie)
@@ -24,6 +19,7 @@ export default {
   data () {
     return {
       pie,
+      name:'王力'
     };
   },
 
@@ -32,6 +28,7 @@ export default {
   methods: {},
 
   components: {
+    UserInfo,
     TextPanel
   },
 }

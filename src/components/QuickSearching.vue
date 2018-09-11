@@ -1,5 +1,9 @@
 <template>
-  <div></div>
+  <div class="searching-wrapper">
+    
+    
+
+  </div>
 </template>
 
 <script>
