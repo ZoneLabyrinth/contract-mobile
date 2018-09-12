@@ -7,6 +7,9 @@ import axios from '@/api/http.js'
 import FastClick from 'fastclick'
 import * as filters from './utils/filters'
 
+import Velocity from 'velocity-animate/velocity'
+import 'velocity-animate/velocity.ui'
+
 import Echarts from "vue-echarts/components/Echarts"
 
 import 'echarts/lib/chart/pie'
@@ -23,6 +26,7 @@ import {
 FastClick.attach(document.body)
 Vue.config.productionTip = false
 Vue.prototype.axios = axios
+window.Velocity = Velocity
 
 //默认使用vux组件
 Vue.use(ToastPlugin)

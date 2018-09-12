@@ -25,7 +25,6 @@ export default {
         default:false
     }
   },  
-  mounted(){},
 
   methods: {
       OnItemClick(item){
