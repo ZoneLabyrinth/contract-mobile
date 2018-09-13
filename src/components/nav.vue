@@ -1,6 +1,5 @@
 <template>
     <div class="nav-wrapper">
-        <quick-searching v-if="show"></quick-searching>
         <tab class="re-tab">
             <tab-item v-for="(item,index) in nav" :key="index" :selected="$route.path === item.url"  @on-item-click="OnItemClick(item)">{{item.name}}</tab-item>
         </tab>
@@ -9,7 +8,6 @@
 
 <script>
 import { Tab, TabItem } from 'vux'
-import QuickSearching from '@/components/QuickSearching'
 export default {
   data () {
     return {
@@ -20,10 +18,6 @@ export default {
       type:Array,
       required:true
     },
-    show:{
-        type:Boolean,
-        default:false
-    }
   },  
 
   methods: {
@@ -33,8 +27,7 @@ export default {
   },
   components: {
       Tab,
-      TabItem,
-      QuickSearching
+      TabItem
   },
 }
 

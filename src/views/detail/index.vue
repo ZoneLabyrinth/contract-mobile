@@ -1,6 +1,7 @@
 <template>
   <div class="department-wrapper">
-    <app-header :nav="contract"></app-header>
+    <quick-searching></quick-searching>
+    <app-header :nav="contract" show></app-header>
     <div class="view">
       <router-view></router-view>
     </div>
@@ -9,6 +10,7 @@
 
 <script>
 import AppHeader from "@/components/nav";
+import QuickSearching from '@/components/QuickSearching' 
 export default {
   name: "App",
   data() {
@@ -22,14 +24,15 @@ export default {
     };
   },
   components: {
-    AppHeader
+    AppHeader,
+    QuickSearching
   },
 };
 </script>
 
 <style lang="less" scoped>
 .view {
-  @diff: 2.2rem;
+  @diff: 4.2rem;
   height: calc(~"100vh - @{diff}");
   overflow-y: auto;
 }
