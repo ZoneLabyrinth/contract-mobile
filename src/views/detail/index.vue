@@ -1,6 +1,6 @@
 <template>
   <div class="department-wrapper">
-    <quick-searching></quick-searching>
+    <!-- <quick-searching></quick-searching> -->
     <app-header :nav="contract" show></app-header>
     <div class="view">
       <router-view></router-view>

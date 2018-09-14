@@ -3,7 +3,7 @@ import { vm } from '@/main.js';
 
 // axios配置
 axios.defaults.timeout = 5000;
-axios.defaults.baseURL = '',
+axios.defaults.baseURL = 'http://10.10.4.71:8007',
 
 // request 拦截器
 axios.interceptors.request.use(

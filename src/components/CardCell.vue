@@ -3,12 +3,12 @@
           <div slot="content" class="card-demo">
               <div class="card-demo-flex">
                 <p>
-                    <span>{{data[0].name}}：</span>
-                    <span>{{data[0].value}}</span>
+                    <span>{{name[0].name}}：</span>
+                    <span>{{data[name[0].code]}}</span>
                 </p>
                 <p>
-                    <span>{{data[1].name}}： </span>
-                    <span>{{data[1].vaule}}</span>
+                    <span>{{name[1].name}}： </span>
+                    <span>{{data[name[1].code]}}</span>
                 </p>
               </div>
               <transition name="fade"
@@ -16,9 +16,9 @@
                 @enter="enter"
                 @leave="leave">
                 <div class="card-demo-flex" v-if="show">
-                    <p v-for="(item,index) in data" :key="index" v-if="index!==1&index!==2">
-                        <span>{{item.name}}：</span>
-                        <span>{{item.value}}</span>
+                    <p v-for="(item,index) in name" :key="index" v-if="index!==0&&index!==1">
+                      <span>{{item.name}}： </span>
+                      <span>{{data[item.code]}}</span>
                     </p>
                     <p></p>
                 </div>
@@ -45,6 +45,10 @@ export default {
   
   props:{
       data:{
+          type:Object,
+          required:true
+      },
+      name:{
           type:Array,
           required:true
       }
@@ -113,11 +117,19 @@ export default {
     .card-demo-flex {
       .flex(@justify:space-around,@wrap:wrap);
       p {
-        .flex(@justify:flex-start);
+        .flex(@justify:flex-start,@wrap:nowrap);
         width: 7rem;
         font-size: 0.6rem;
         position: relative;
         padding: 0.1rem 0;
+        span{
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          &:hover{
+            overflow: visible
+          }
+        }
       }
       p:nth-child(odd) {
         &::after {
