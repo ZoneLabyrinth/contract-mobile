@@ -1,10 +1,17 @@
 <template>
   <div class="contract-wrapper">
     <user-info :name="name"></user-info>
-     <text-panel>
-       <p slot="chart">
+     <text-panel :data="contract" >
+       <div slot="chart">
          <e-charts :options="pie"></e-charts>
-       </p>
+       </div>
+     </text-panel>
+     <chart-panel :data="receivables" showChart title="应收账款余额占合同金额比重">
+     </chart-panel>
+     <text-panel title="权责预收占合同金额比重" :data="response">
+       <div slot="chart">
+         <e-charts :options="pie1"></e-charts>
+       </div>
      </text-panel>
 
   </div>
@@ -12,52 +19,139 @@
 
 <script>
 import UserInfo from "@/components/UserInfo";
-import TextPanel from '@/components/Textpanel'
-import { pie } from '@/assets/js/pie'
-console.log(pie)
+import TextPanel from "@/components/TextPanel";
+import ChartPanel from "@/components/ChartPanel";
+import { pie } from "@/assets/js/pie";
+const pie1 = JSON.parse(JSON.stringify(pie))
 export default {
-  data () {
+  data() {
     return {
       pie,
-      name:'王力'
+      pie1,
+      name: "王力",
+      conChart: [
+        {name:'其他',value:''},
+        {name:"合同应收",value:''}
+      ],
+      resChart: [
+        {name:'其他',value:''},
+        {name:"权责预收",value:''}
+      ],
+      contract: [
+        {
+          name: "合同金额",
+          amount: "",
+          percent: [],
+          title:'合同金额比重'
+        }
+      ],
+      receivables:[
+        {
+          name:'合同应收',
+          amount:'',
+          percent:'',
+          title:'合同应收比重'
+        },
+        {
+          name:'权责应收',
+          amount:'',
+          percent:'',
+          title:'权责应收比重'
+        },
+        {
+          name:'发票应收',
+          amount:'',
+          percent:'',
+          title:'发票应收比重'
+        }
+      ],
+      response:[
+        {
+          name:'权责预收',
+          amount:'',
+          percent:'',
+          title:'权责预收比重'
+        }
+      ]
     };
   },
 
-  mounted(){},
+  mounted() {
+    this.getData();
+  },
 
-  methods: {},
+  methods: {
+    getData() {
+      this.axios
+        .get(
+          `${
+            this.api.getContract
+          }?abnormal_name=${this.$route.meta.status}&gs_flag=销售部门经理&now_date=2018-09-12&push_name=杨国`
+        )
+        .then(result => {
+          // console.log(result);
+          if (result.data.flag === 0) {
+            
+            Object.assign(this.contract[0],result.data.data.allAmount);
+            console.log(this.contract)
+            Object.assign(this.receivables[0],result.data.data.contract);
+            Object.assign(this.receivables[1],result.data.data.responsiblity);
+            Object.assign(this.receivables[2],result.data.data.invoice);
+            Object.assign(this.response,result.data.data.advanced)
+            
+
+            this.conChart.forEach((element,index) => {
+              element.value = result.data.data.allAmount.percent[index];
+              this.resChart[index].value = result.data.data.responsiblity.percent[index]
+            });
+            this.pie.series[0].data = this.conChart;
+            this.pie.graphic.style.text = this.conChart[1].value*100 + '%'
+            this.pie1.series[0].data = this.resChart;
+            this.pie1.graphic.style.text = this.resChart[1].value*100 + '%'
+            this.pie1.title.text = '权责预收比重'
+          }
+        })
+        .catch(err => {});
+    }
+  },
+  watch:{
+    '$route'(to,from){
+      if(to.path!== from.path){
+          this.getData();
+      }
+    }
+
+  },
 
   components: {
     UserInfo,
-    TextPanel
-  },
-}
-
+    TextPanel,
+    ChartPanel
+  }
+};
 </script>
 <style lang='less'>
-@import url('../../assets/styles/mixin.less');
-.contract-wrapper{
+@import url("../../assets/styles/mixin.less");
+.contract-wrapper {
   .wh(100%,100%);
-  background: #F5F5F5;
-  .user-info{
+  background: #f5f5f5;
+  .user-info {
     height: 2rem;
     // line-height: 2rem;
-    p{  
+    p {
       height: 2rem;
       line-height: 2rem;
       padding-left: 0.9rem;
-      i{
+      i {
         font-size: 0.9rem;
         vertical-align: middle;
-        color:@theme-color
+        color: @theme-color;
       }
-      span{
+      span {
         font-size: 0.7rem;
-        font-weight: bold
+        font-weight: bold;
       }
     }
   }
 }
-
-
 </style>

@@ -3,33 +3,84 @@ export const pie = {
         trigger: 'item',
         formatter: "{a} <br/>{b}: {c} ({d}%)"
     },
-    title:{
-        show:true,
-        x:'center',
-        y:'bottom',
-        text:'合同应收',
-        textStyle:{
-            fontSize:12
+    title: {
+        show: true,
+        x: 'center',
+        y: 'bottom',
+        text: '合同金额比重',
+        textStyle: {
+            fontSize: 12,
+            fontWeight: 100
+        },
+    },
+    graphic:{
+        type:'text',
+        left:'center',
+        top:'32%',
+        style:{
+            text:"80%",
+            fontSize:'10',
+            textAlign:'center'
         }
     },
     series: [
         {
-            
-            type:'pie',
-            name:'访问来源',
-            radius: ['40%', '50%'],
+
+            type: 'pie',
+            name: '',
+            center:['50%','40%'],
+            radius: ['45%', '50%'],
             label: {
                 normal: {
                     show: false
                 }
             },
-            data:[
-                {value:335, name:'直接访问'},
-                {value:310, name:'邮件营销'},
-                {value:234, name:'联盟广告'},
-                {value:135, name:'视频广告'},
-                {value:1548, name:'搜索引擎'}
+            data: [
+                { value: '8', name: '合同应收比重' },
+                { value: '10', name: '其他比重' },
             ]
         }
-    ]
+    ],
+    color:['#000','#FF1F2D']
+};
+
+
+export const rose = {
+    title : {
+        text: '',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        x : 'center',
+        y : 'top',
+        textAlign:'center',
+        icon:'circle'
+    },
+    calculable : true,
+    series : [
+        {
+            type:'pie',
+            name:'人员',
+            radius : [40, 80],
+            center : ['50%', '50%'],
+            roseType : 'area',
+            data:[
+                {value:10, name:'rose1'},
+                {value:5, name:'rose2'},
+                {value:15, name:'rose3'},
+                {value:25, name:'rose4'},
+                {value:20, name:'rose5'},
+            ],
+            label:{
+                show:true,
+                formatter:"{c} \n {b}",
+                textAlign:'center'
+            }
+        }
+    ],
+    color:['#eba96b','#e4615c','#79e2f2','#68d9c0','#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3']
 };

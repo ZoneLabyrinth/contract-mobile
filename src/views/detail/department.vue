@@ -1,13 +1,16 @@
 <template>
-  <div class="detail-wrapper">
+  <div class="detail-wrapper" ref="content" @scroll="handlerScroll()">
+  <!-- <div class="detail-wrapper" ref="content"> -->
     <user-info :name="name"></user-info>
     <card-cell v-for="(item,index) in data" :key="index" :data="item" :name="items" ></card-cell>
+    <load-more :show-loading="showLoad" :tip="tip" background-color="#fbf9fe"></load-more>
   </div>
 </template>
 
 <script>
 import UserInfo from "@/components/UserInfo";
 import CardCell from "@/components/CardCell";
+import { LoadMore } from "vux";
 export default {
   data() {
     return {
@@ -29,12 +32,17 @@ export default {
         { name: "权责预收账款", code: "responsibilityAdv" },
         { name: "异常合同状态", code: "abnormalState" }
       ],
-      data: []
+      data: [],
+      tip: "正在加载",
+      showLoad: true,
+      page: 1
     };
   },
-
-  created() {
-    // this.getList();
+  props: {
+    keyword: {
+      type: String,
+      default: ""
+    }
   },
 
   mounted() {
@@ -42,24 +50,79 @@ export default {
   },
 
   methods: {
+    handlerScroll() {
+      let el = this.$el;
+      const _this = this;
+      this.throttle(() => {
+        if (el.scrollTop + el.clientHeight >= el.scrollHeight) {
+          _this.page += 1;
+          _this.getList();
+        }
+      },2000)();
+    },
     getList() {
       this.axios
-        .get("/details/department?date=2018-09-11&name=徐丽霞")
+        .get(
+          `${this.api.getDetail}?ddate_td=${
+            this.$route.meta.title
+          }&push_name=徐丽霞&rows=1&size=${this.page * 10}&customer=${
+            this.keyword
+          }`
+        )
         .then(result => {
           if (result.data.flag === 0) {
-            this.data = result.data.data.data;
-            console.log(this.data);
+            if (this.page * 10 >= result.data.data.totalRecord) {
+              this.showLoad = false;
+              this.tip = "暂无更多数据";
+              this.data = result.data.data.list;
+            } else {
+              this.showLoad = true;
+              this.tip = "正在加载";
+              this.data = result.data.data.list;
+            }
           }
         })
         .catch(err => {});
+    },
+    //节流函数
+    throttle(methods, duration) {
+      let begin = new Date();
+      return function() {
+        let context = this,
+          args = arguments,
+          current = new Date();
+        if (current - begin >= duration) {
+          methods.apply(context, args);
+          begin = current;
+        }
+      };
+    }
+  },
+  watch: {
+    keyword(val) {
+      this.page = 1;
+      this.getList();
+    },
+    //使用同一组件跳转不发生刷新，监听路由变化
+    $route(to, from) {
+      console.log(from);
+      if (to.path !== from.path) {
+        this.getList();
+      }
     }
   },
 
   components: {
     UserInfo,
-    CardCell
+    CardCell,
+    LoadMore
   }
 };
 </script>
 <style lang='less' scoped>
+.detail-wrapper {
+  @diff: 4.2rem;
+  height: calc(~"100vh - @{diff}");
+  overflow-y: auto;
+}
 </style>

@@ -7,6 +7,12 @@
           <p v-for="(item,index) in data" :key="index">
              <span>{{item.amount | formatCash}}</span> 
              <span>{{item.name}}</span>
+             <span v-if="showChart">
+               <e-charts :options="chart[index]"></e-charts>
+             </span>
+             <!-- <span v-if="showChart">
+               {{item.title}}
+             </span> -->
              <u :style="{'left':left}"></u>
           </p>
           <slot name="chart"></slot>
@@ -16,24 +22,34 @@
 
 <script>
 import { pie } from "@/assets/js/pie.js";
-// const pie1 = JSON.parse(JSON.stringify(pie));
-// const pie2 = JSON.parse(JSON.stringify(pie));
-// const pie3 = JSON.parse(JSON.stringify(pie));
+import { constants } from "zlib";
+import { setTimeout } from 'timers';
+const pie1 = JSON.parse(JSON.stringify(pie));
+const pie2 = JSON.parse(JSON.stringify(pie));
+const pie3 = JSON.parse(JSON.stringify(pie));
 // console.log(pie0)
 export default {
   data() {
     return {
       isMounted: false,
-      pie,
-      // chart: [pie1, pie2, pie3],
+      chart: [pie1, pie2, pie3],
       series: [
         [{ name: "其他", value: "" }, { name: "合同应收", value: "" }],
         [{ name: "其他", value: "" }, { name: "权责应收", value: "" }],
         [{ name: "其他", value: "" }, { name: "发票应收", value: "" }]
+      ],
+      color:[
+        ['#000','#FF1F2D'],
+        ["#000",'#00B79D'],
+        ["#000",'#FFB800']
       ]
     };
   },
   props: {
+    showChart: {
+      type: Boolean,
+      default: false
+    },
     data: {
       type: Array
     },
@@ -65,15 +81,31 @@ export default {
           this.chart[index].title.text = element.title;
           this.series[index].forEach((el,i) =>{
             el.value = element.percent[i]
-            console.log(element.percent[i])
           })
-          console.log(this.series[index])
+          
           this.chart[index].series[0].data = this.series[index]
         });
     }
   },
 
   watch: {
+    data:{
+      handler:function(newVal,oldVal){
+        this.data.forEach((element, index) => {
+          this.data.forEach((element, index) => {
+            this.chart[index].title.text = element.title;
+            this.series[index].forEach((el,i) =>{
+              el.value = element.percent[i]
+            })
+            this.chart[index].series[0].data = this.series[index];
+            // alert(element.percent[1])
+            this.chart[index].graphic.style.text = element.percent[1]*100 + '%'
+            this.chart[index].color = this.color[index];
+          });
+        });
+      },
+      deep:true  
+    }
   },
 
   components: {}
@@ -108,8 +140,8 @@ export default {
       .flex(@dir:column);
       position: relative;
       span:first-child {
-        font-size: 0.8rem;
-        font-weight: bold;
+        font-size: 0.9rem;
+        font-weight: bold
       }
       span:nth-child(2) {
         padding-top: 0.75rem;

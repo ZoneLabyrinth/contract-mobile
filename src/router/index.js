@@ -11,8 +11,32 @@ export default new Router({
       children:[
         {
           path: 'normal',
-          component:()=>import('@/views/department/normal')
+          component:()=>import('@/views/department/normal'),
+          meta:{
+            title:'正常合同',
+            status:'0'
+          }
         },
+        {
+          path: 'termination',
+          component:()=>import('@/views/department/normal'),
+          meta:{
+            title:'合同终止',
+            status:'1'
+          }
+        },
+        {
+          path: 'pause',
+          component:()=>import('@/views/department/normal'),
+          meta:{
+            title:'合同暂停',
+            status:'2'
+          }
+        },
+        {
+          path:'total',
+          component:()=>import('@/views/department/total')
+        }
       ],
       redirect:'/department/normal'
     },
@@ -22,19 +46,31 @@ export default new Router({
       children:[
         {
           path:'before',
-          component:()=>import("@/views/detail/department")
+          component:()=>import("@/views/detail/department"),
+          meta:{
+            title:'2016年以前'
+          }
         },
         {
           path:'after',
-          component:()=>import("@/views/detail/department")
+          component:()=>import("@/views/detail/department"),
+          meta:{
+            title:'2016年'
+          }
         },
         {
           path:'last',
-          component:()=>import("@/views/detail/department")
+          component:()=>import("@/views/detail/department"),
+          meta:{
+            title:'2017年'
+          }
         },
         {
           path:'date',
-          component:()=>import("@/views/detail/department")
+          component:()=>import("@/views/detail/department"),
+          meta:{
+            title:'2018年'
+          }
         }
       ],
       redirect:'/detail/before'

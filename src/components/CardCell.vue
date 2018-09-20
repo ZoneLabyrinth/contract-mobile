@@ -1,35 +1,44 @@
 <template>
   <card class="card-wrapper">
-          <div slot="content" class="card-demo">
-              <div class="card-demo-flex">
-                <p>
-                    <span>{{name[0].name}}：</span>
-                    <span>{{data[name[0].code]}}</span>
-                </p>
-                <p>
-                    <span>{{name[1].name}}： </span>
-                    <span>{{data[name[1].code]}}</span>
-                </p>
-              </div>
-              <transition name="fade"
-                @before-enter="beforeEnter"
-                @enter="enter"
-                @leave="leave">
-                <div class="card-demo-flex" v-if="show">
-                    <p v-for="(item,index) in name" :key="index" v-if="index!==0&&index!==1">
-                      <span>{{item.name}}： </span>
-                      <span>{{data[item.code]}}</span>
-                    </p>
-                    <p></p>
-                </div>
-            </transition>
+    <div slot="content" class="card-demo">
+        <div class="card-demo-flex">
+          <p>
+              <span>{{name[0].name}}：</span>
+              <span>{{data[name[0].code]}}</span>
+          </p>
+          <p>
+              <span>{{name[1].name}}： </span>
+              <span>{{data[name[1].code]}}</span>
+          </p>
+        </div>
+        <transition name="fade"
+          @before-enter="beforeEnter"
+          @enter="enter"
+          @leave="leave">
+          <div class="card-demo-flex" v-if="show">
+              <p v-for="(item,index) in name" :key="index" v-if="index!==0&&index!==1">
+                <span>{{item.name}}： </span>
+                <span>{{data[item.code]}}</span>
+              </p>
+              <p></p>
           </div>
-          <div slot="footer" class="card-footer"  @click="handlerMore()">
-            <p>
-                <i class="iconfont icon-z044" :style="rotate"></i>
-                <span>{{show?'收起':'查看更多'}}</span>
-            </p>
+        </transition>
+          <!-- <transition name="fade">
+          <div class="card-demo-flex" v-if="show">
+              <p v-for="(item,index) in name" :key="index" v-if="index!==0&&index!==1">
+                <span>{{item.name}}： </span>
+                <span>{{data[item.code]}}</span>
+              </p>
+              <p></p>
           </div>
+        </transition> -->
+    </div>
+    <div slot="footer" class="card-footer"  @click="handlerMore()">
+      <p>
+          <i class="iconfont icon-z044" :style="rotate"></i>
+          <span>{{show?'收起':'查看更多'}}</span>
+      </p>
+    </div>
   </card>
 </template>
 
@@ -42,22 +51,20 @@ export default {
       more: "查看更多"
     };
   },
-  
-  props:{
-      data:{
-          type:Object,
-          required:true
-      },
-      name:{
-          type:Array,
-          required:true
-      }
+
+  props: {
+    data: {
+      type: Object,
+      required: true
+    },
+    name: {
+      type: Array,
+      required: true
+    }
   },
   computed: {
     rotate() {
-      return this.show
-        ? "transform:rotate(180deg)"
-        : "transform:rotate(0deg)";
+      return this.show ? "transform:rotate(180deg)" : "transform:rotate(0deg)";
     }
   },
 
@@ -72,15 +79,8 @@ export default {
       el.style.height = "0rem";
     },
     enter: function(el, done) {
-      Velocity(
-        el,
-        { opacity: 1, height: "8.25rem" },
-        { duration: 300 },
-      );
-      Velocity(
-        el,
-        { complete: done }
-      );
+      Velocity(el, { opacity: 1, height: "8.25rem" }, { duration: 300 });
+      Velocity(el, { complete: done });
     },
     leave: function(el, done) {
       Velocity(
@@ -89,10 +89,7 @@ export default {
         { duration: 300 },
         { complete: done }
       );
-      Velocity(
-        el,
-        { complete: done }
-      );
+      Velocity(el, { complete: done });
     }
   },
 
@@ -122,12 +119,12 @@ export default {
         font-size: 0.6rem;
         position: relative;
         padding: 0.1rem 0;
-        span{
+        span {
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
-          &:hover{
-            overflow: visible
+          &:hover {
+            overflow: visible;
           }
         }
       }
@@ -149,7 +146,7 @@ export default {
     // .fade-enter-active,
     // .fade-leave-active {
     //   height: 8rem;
-    //   transition: all 0.5s ease;
+    //   transition: all 0.3s ease;
     // }
     // .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     //   height: 0rem;
@@ -160,10 +157,10 @@ export default {
     text-align: center;
     padding: 0 0.6rem 0.55rem;
     p {
-        position: relative;
+      position: relative;
       i {
         font-size: 0.4rem;
-        color: #FA7070;
+        color: #fa7070;
         transform: scale(0.5);
         -webkit-transform: scale(0.5);
         display: inline-block;

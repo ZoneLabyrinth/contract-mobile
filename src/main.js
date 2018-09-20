@@ -6,6 +6,7 @@ import router from './router'
 import axios from '@/api/http.js'
 import FastClick from 'fastclick'
 import * as filters from './utils/filters'
+import api from '@/api/index.js'
 
 import Velocity from 'velocity-animate/velocity'
 import 'velocity-animate/velocity.ui'
@@ -26,6 +27,7 @@ import {
 FastClick.attach(document.body)
 Vue.config.productionTip = false
 Vue.prototype.axios = axios
+Vue.prototype.api = api
 window.Velocity = Velocity
 
 //默认使用vux组件

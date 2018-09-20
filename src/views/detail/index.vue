@@ -1,9 +1,9 @@
 <template>
   <div class="department-wrapper">
-    <!-- <quick-searching></quick-searching> -->
+    <quick-searching @keyword="getKeyword"></quick-searching>
     <app-header :nav="contract" show></app-header>
     <div class="view">
-      <router-view></router-view>
+      <router-view :keyword="keyword"></router-view>
     </div>
   </div>
 </template>
@@ -21,7 +21,13 @@ export default {
         { url: "/detail/last", name: "2017年" },
         { url: "/detail/date", name: "2018年" }
       ],
+      keyword:'sdafd'
     };
+  },
+  methods:{
+    getKeyword(name){
+      this.keyword = name
+    }
   },
   components: {
     AppHeader,
@@ -31,9 +37,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.view {
-  @diff: 4.2rem;
-  height: calc(~"100vh - @{diff}");
-  overflow-y: auto;
-}
+// .view {
+//   @diff: 4.2rem;
+//   height: calc(~"100vh - @{diff}");
+//   overflow-y: auto;
+// }
 </style>
