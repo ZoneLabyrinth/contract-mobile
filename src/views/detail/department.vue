@@ -53,12 +53,14 @@ export default {
     handlerScroll() {
       let el = this.$el;
       const _this = this;
-      this.throttle(() => {
-        if (el.scrollTop + el.clientHeight >= el.scrollHeight) {
+      console.log(el.scrollTop,el.clientHeight,el.scrollHeight)
+      _.throttle(() => {
+        if (el.scrollTop + el.clientHeight >= el.scrollHeight-1) {
           _this.page += 1;
+          console.log(_this.page)
           _this.getList();
         }
-      },2000)();
+      },1000)();
     },
     getList() {
       this.axios
@@ -124,5 +126,6 @@ export default {
   @diff: 4.2rem;
   height: calc(~"100vh - @{diff}");
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch; //滚动回弹 用于出现滚动时；
 }
 </style>
