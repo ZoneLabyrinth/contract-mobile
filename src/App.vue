@@ -33,7 +33,7 @@ export default {
   //   AppHeader
   // },
   mounted(){
-    document.write(window.location.href)
+    // document.write(window.location.href)
     // this.login();
   },
   methods:{

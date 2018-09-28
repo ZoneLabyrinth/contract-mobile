@@ -56,12 +56,12 @@ export default {
       // console.log(el.scrollTop,el.clientHeight,el.scrollHeight)
       // _.throttle(() => {
       // },1000)();
-      _.throttle(function(){
+      // _.throttle(function(){
         if (el.scrollTop + el.clientHeight >= el.scrollHeight-1) {
           _this.page += 1;
           _this.getList();
         }
-      },1000)()
+      // },1000)()
 
 
     },
