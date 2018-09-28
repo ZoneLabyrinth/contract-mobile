@@ -8,7 +8,8 @@
 </template>
 
 <script>
-// import AppHeader from '@/components/nav'
+import { getQueryString } from '@/utils/filters'
+import { mapMutations } from 'vuex'
 export default {
   name: "App",
   data(){
@@ -31,10 +32,29 @@ export default {
   // components:{
   //   AppHeader
   // },
-  // mounted(){
-  //   this.isContract = false
+  mounted(){
+    alert(window.location.href)
+    this.login();
+  },
+  methods:{
+    ...mapMutations(['SET_USERINFO']),
+    login(){
+      const code = getQueryString('code');
+      console.log(code)
+      this.axios.get(`${this.api.getUser}?param=${code}`)
+      .then((result) => {
+        if(result.data.flag === 0){
+          console.log(result.data.data)
+          this.SET_USERINFO(result.data.data)
 
-  // }
+        }
+      }).catch((err) => {
+        
+      });
+    }
+  }
+
+
 };
 </script>
 

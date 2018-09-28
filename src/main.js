@@ -6,6 +6,7 @@ import router from './router'
 import axios from '@/api/http.js'
 import FastClick from 'fastclick'
 import * as filters from './utils/filters'
+import store from './vuex'
 import api from '@/api/index.js'
 
 import Velocity from 'velocity-animate/velocity'
@@ -46,5 +47,6 @@ Object.keys(filters).forEach(key => Vue.filter(key, filters[key]))
 export const vm = new Vue({
   el: '#app',
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')

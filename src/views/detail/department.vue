@@ -112,6 +112,8 @@ export default {
     $route(to, from) {
       console.log(from);
       if (to.path !== from.path) {
+        this.page = 1;
+        this.$refs.content.scrollTop = 0;
         this.getList();
       }
     }

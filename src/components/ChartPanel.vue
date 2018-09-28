@@ -22,8 +22,6 @@
 
 <script>
 import { pie } from "@/assets/js/pie.js";
-import { constants } from "zlib";
-import { setTimeout } from 'timers';
 const pie1 = JSON.parse(JSON.stringify(pie));
 const pie2 = JSON.parse(JSON.stringify(pie));
 const pie3 = JSON.parse(JSON.stringify(pie));
@@ -34,14 +32,14 @@ export default {
       isMounted: false,
       chart: [pie1, pie2, pie3],
       series: [
-        [{ name: "其他", value: "" }, { name: "合同应收", value: "" }],
-        [{ name: "其他", value: "" }, { name: "权责应收", value: "" }],
-        [{ name: "其他", value: "" }, { name: "发票应收", value: "" }]
+        [{ name: "合同应收", value: "" }, { name: "其他", value: "" }],
+        [{ name: "权责应收", value: "" }, { name: "其他", value: "" }],
+        [{ name: "发票应收", value: "" }, { name: "其他", value: "" }]
       ],
       color:[
-        ['#000','#FF1F2D'],
-        ["#000",'#00B79D'],
-        ["#000",'#FFB800']
+        ['#FF1F2D','#000'],
+        ["#00B79D",'#000'],
+        ["#FFB800",'#000']
       ]
     };
   },
@@ -91,18 +89,17 @@ export default {
   watch: {
     data:{
       handler:function(newVal,oldVal){
-        this.data.forEach((element, index) => {
           this.data.forEach((element, index) => {
             this.chart[index].title.text = element.title;
             this.series[index].forEach((el,i) =>{
-              el.value = element.percent[i]
+              el.value = element.percent?element.percent[i]:0
             })
             this.chart[index].series[0].data = this.series[index];
             // alert(element.percent[1])
-            this.chart[index].graphic.style.text = element.percent[1]*100 + '%'
+            this.chart[index].graphic.style.text = element.percent?element.percent[0]*100 + '%':'无数据'
             this.chart[index].color = this.color[index];
           });
-        });
+        
       },
       deep:true  
     }

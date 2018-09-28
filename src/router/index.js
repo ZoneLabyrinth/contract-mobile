@@ -75,6 +75,42 @@ export default new Router({
       ],
       redirect:'/detail/before'
     },
+    //个人
+    {
+      path: '/personal',
+      component:()=>import('@/views/personal/index'),
+      children:[
+        {
+          path: 'normal',
+          component:()=>import('@/views/personal/normal'),
+          meta:{
+            title:'正常合同',
+            status:'0'
+          }
+        },
+        {
+          path: 'termination',
+          component:()=>import('@/views/personal/normal'),
+          meta:{
+            title:'合同终止',
+            status:'1'
+          }
+        },
+        {
+          path: 'pause',
+          component:()=>import('@/views/personal/normal'),
+          meta:{
+            title:'合同暂停',
+            status:'2'
+          }
+        },
+        {
+          path:'total',
+          component:()=>import('@/views/personal/total')
+        }
+      ],
+      redirect:'/personal/normal'
+    },
   ],
   linkActiveClass: 'active'
 })

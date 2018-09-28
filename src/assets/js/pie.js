@@ -18,7 +18,7 @@ export const pie = {
         left:'center',
         top:'32%',
         style:{
-            text:"80%",
+            text:"无数据",
             fontSize:'10',
             textAlign:'center'
         }
@@ -28,7 +28,7 @@ export const pie = {
 
             type: 'pie',
             name: '',
-            center:['50%','40%'],
+            center:['50%','37%'],
             radius: ['45%', '50%'],
             label: {
                 normal: {
@@ -36,12 +36,12 @@ export const pie = {
                 }
             },
             data: [
-                { value: '8', name: '合同应收比重' },
-                { value: '10', name: '其他比重' },
+                { value: '', name: '合同应收比重' },
+                { value: '', name: '其他比重' },
             ]
         }
     ],
-    color:['#000','#FF1F2D']
+    color:['#FF1F2D','#000']
 };
 
 
