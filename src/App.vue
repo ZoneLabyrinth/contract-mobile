@@ -34,7 +34,7 @@ export default {
   // },
   mounted(){
     // document.write(window.location.href)
-    // this.login();
+    this.login();
   },
   methods:{
     ...mapMutations(['SET_USERINFO']),

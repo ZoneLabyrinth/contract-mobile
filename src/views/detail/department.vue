@@ -1,6 +1,6 @@
 <template>
-  <div class="detail-wrapper" ref="content" @scroll="handlerScroll()">
-  <!-- <div class="detail-wrapper" ref="content"> -->
+  <!-- <div class="detail-wrapper" ref="content" @scroll="handlerScroll()"> -->
+  <div class="detail-wrapper" ref="content">
     <user-info :name="name"></user-info>
     <card-cell v-for="(item,index) in data" :key="index" :data="item" :name="items" ></card-cell>
     <load-more :show-loading="showLoad" :tip="tip" background-color="#fbf9fe"></load-more>
@@ -47,21 +47,26 @@ export default {
 
   mounted() {
     this.getList();
+    const _this = this;
+    let el = this.$refs.content;
+    el.addEventListener('scroll',function(){
+      _this.handlerScroll()
+    },true)
   },
 
   methods: {
     handlerScroll() {
       let el = this.$el;
       const _this = this;
-      // console.log(el.scrollTop,el.clientHeight,el.scrollHeight)
+      console.log(el.scrollTop,el.clientHeight,el.scrollHeight)
       // _.throttle(() => {
       // },1000)();
-      // _.throttle(function(){
+      _.throttle(function(){
         if (el.scrollTop + el.clientHeight >= el.scrollHeight-1) {
           _this.page += 1;
           _this.getList();
         }
-      // },1000)()
+      },2000)()
 
 
     },
