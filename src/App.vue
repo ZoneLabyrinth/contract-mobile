@@ -33,21 +33,17 @@ export default {
   //   AppHeader
   // },
   mounted(){
-      console.log(window.location.search)
-    
-    
+
     this.login();
   },
   methods:{
     ...mapMutations(['SET_USERINFO']),
     login(){
-      const code = this.$route.query.code;
-      console.log(this.$route.query.code)
+      const code = getQueryString('code');
       console.log(code)
       this.axios.get(`${this.api.getUser}?param=${code}`)
       .then((result) => {
         if(result.data.flag === 0){
-          console.log(result.data.data)
           this.SET_USERINFO(result.data.data)
 
         }
