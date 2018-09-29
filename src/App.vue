@@ -33,13 +33,16 @@ export default {
   //   AppHeader
   // },
   mounted(){
-    // document.write(window.location.href)
+      console.log(window.location.search)
+    
+    
     this.login();
   },
   methods:{
     ...mapMutations(['SET_USERINFO']),
     login(){
-      const code = getQueryString('code');
+      const code = this.$route.query.code;
+      console.log(this.$route.query.code)
       console.log(code)
       this.axios.get(`${this.api.getUser}?param=${code}`)
       .then((result) => {
@@ -51,6 +54,11 @@ export default {
       }).catch((err) => {
         
       });
+    }
+  },
+  watch:{
+    '$router'(to,from){
+      console.log(this.$route.query.code)
     }
   }
 
