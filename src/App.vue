@@ -45,7 +45,6 @@ export default {
       .then((result) => {
         if(result.data.flag === 0){
           this.SET_USERINFO(result.data.data)
-
         }
       }).catch((err) => {
         

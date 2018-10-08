@@ -11,10 +11,11 @@
               <span>{{data[name[1].code]}}</span>
           </p>
         </div>
-        <transition name="fade"
+        <!-- <transition name="fade"
           @before-enter="beforeEnter"
           @enter="enter"
-          @leave="leave">
+          @leave="leave"> -->
+        <transition> 
           <div class="card-demo-flex" v-if="show">
               <p v-for="(item,index) in name" :key="index" v-if="index!==0&&index!==1">
                 <span>{{item.name}}： </span>
