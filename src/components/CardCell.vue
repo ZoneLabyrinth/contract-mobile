@@ -3,7 +3,7 @@
     <div slot="content" class="card-demo">
         <div class="card-demo-flex">
           <p>
-              <span>{{name[0].name}}：</span>
+              <span>{{name[0].name}}： </span>
               <span>{{data[name[0].code]}}</span>
           </p>
           <p>
@@ -11,11 +11,10 @@
               <span>{{data[name[1].code]}}</span>
           </p>
         </div>
-        <!-- <transition name="fade"
+        <transition name="fade"
           @before-enter="beforeEnter"
           @enter="enter"
-          @leave="leave"> -->
-        <transition> 
+          @leave="leave">
           <div class="card-demo-flex" v-if="show">
               <p v-for="(item,index) in name" :key="index" v-if="index!==0&&index!==1">
                 <span>{{item.name}}： </span>
@@ -72,7 +71,7 @@ export default {
   mounted() {},
 
   methods: {
-    handlerMore() {
+    handlerMore(e) {
       this.show = !this.show;
     },
     beforeEnter: function(el) {

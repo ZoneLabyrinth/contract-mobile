@@ -53,9 +53,11 @@ export default {
   },
 
   methods: {
-    handlerScroll() {
+    handlerScroll(e) {
+      e.preventDefault();
       let el = this.$el;
       const _this = this;
+      
       console.log(el.scrollTop,el.clientHeight,el.scrollHeight)
         if (el.scrollTop + el.clientHeight >= el.scrollHeight) {
           _this.page += 1;
