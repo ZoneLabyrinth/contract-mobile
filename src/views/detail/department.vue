@@ -49,20 +49,19 @@ export default {
     this.getList();
     const _this = this;
     let el = this.$refs.content;
-    el.addEventListener('scroll',_.throttle(_this.handlerScroll,1000),true)
+    el.addEventListener("scroll",_.throttle(_this.handlerScroll, 1000));
   },
 
   methods: {
-    handlerScroll(e) {
-      e.preventDefault();
+    handlerScroll() {
       let el = this.$el;
       const _this = this;
-      
-      console.log(el.scrollTop,el.clientHeight,el.scrollHeight)
-        if (el.scrollTop + el.clientHeight >= el.scrollHeight) {
-          _this.page += 1;
-          _this.getList();
-        }
+
+      // console.log(el.scrollTop,el.clientHeight,el.scrollHeight)
+      if (el.scrollTop + el.clientHeight >= el.scrollHeight - 1) {
+        _this.page += 1;
+        _this.getList();
+      }
     },
     getList() {
       this.axios
@@ -91,13 +90,13 @@ export default {
     //节流函数
     throttle(methods, duration) {
       let stattime = 0;
-      return function (...args) {
-          let curTime = new Date();
-          if (curTime - stattime >= duration) {
-              methods.apply(this, args);
-              stattime = curTime;
-          }
-      }
+      return function(...args) {
+        let curTime = new Date();
+        if (curTime - stattime >= duration) {
+          methods.apply(this, args);
+          stattime = curTime;
+        }
+      };
       // let begin = 0 ;
       // return function() {
       //   let context = this,
