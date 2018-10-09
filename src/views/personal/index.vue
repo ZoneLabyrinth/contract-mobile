@@ -27,6 +27,7 @@ export default {
   },
   mounted() {
     this.isContract = false;
+    document.querySelector('title').innerText = '应收账款-个人汇总'
   }
 };
 </script>

@@ -24,6 +24,9 @@ export default {
       keyword:''
     };
   },
+  mounted(){
+    document.querySelector('title').innerText = '应收账款-明细'
+  },
   methods:{
     getKeyword(name){
       this.keyword = name
