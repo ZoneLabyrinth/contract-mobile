@@ -21,7 +21,7 @@ export default {
         { url: "/detail/last", name: "2017年" },
         { url: "/detail/date", name: "2018年" }
       ],
-      keyword:'sdafd'
+      keyword:''
     };
   },
   methods:{

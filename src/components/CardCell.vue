@@ -33,7 +33,7 @@
           </div>
         </transition> -->
     </div>
-    <div slot="footer" class="card-footer"  @click="handlerMore()">
+    <div slot="footer" class="card-footer"  @touchstart="handlerMore()">
       <p>
           <i class="iconfont icon-z044" :style="rotate"></i>
           <span>{{show?'收起':'查看更多'}}</span>
@@ -71,7 +71,7 @@ export default {
   mounted() {},
 
   methods: {
-    handlerMore(e) {
+    handlerMore() {
       this.show = !this.show;
     },
     beforeEnter: function(el) {

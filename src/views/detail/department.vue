@@ -14,7 +14,7 @@ import { LoadMore } from "vux";
 export default {
   data() {
     return {
-      name: "王丽",
+      name: "苗立民",
       items: [
         { name: "销售合同号", code: "num" },
         { name: "客户", code: "cutomer" },
@@ -68,7 +68,7 @@ export default {
         .get(
           `${this.api.getDetail}?ddate_td=${
             this.$route.meta.title
-          }&push_name=徐丽霞&rows=1&size=${this.page * 10}&customer=${
+          }&push_name=苗立民&rows=1&size=${this.page * 10}&customer=${
             this.keyword
           }`
         )

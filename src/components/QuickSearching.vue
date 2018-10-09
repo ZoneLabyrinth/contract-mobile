@@ -55,7 +55,7 @@ export default {
           .get(
             `${
               this.api.searchingList
-            }?ddate_td=2016年以前&push_name=徐丽霞&customer=${this.keyword}`
+            }?ddate_td=2016年以前&push_name=苗立民&customer=${this.keyword}`
           )
           .then(result => {
             if (result.data.flag === 0) {

@@ -28,7 +28,7 @@ export default {
     return {
       pie,
       pie1,
-      name: "王力",
+      name: "苗立民",
       conChart: [
         {name:'合同应收',value:''},
         {name:"其他",value:''}
@@ -85,8 +85,8 @@ export default {
       this.axios
         .get(
           `${
-            this.api.getContract
-          }?abnormal_name=${this.$route.meta.status}&gs_flag=销售部门经理&now_date=2018-09-12&push_name=杨国`
+            this.api.getPersonalContract
+          }?abnormal_name=${this.$route.meta.status}&gs_flag=销售经理&now_date=2018-09-12&push_name=苗立民`
         )
         .then(result => {
           // console.log(result);

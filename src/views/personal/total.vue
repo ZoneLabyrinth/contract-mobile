@@ -89,7 +89,7 @@ export default {
         .get(
           `${
             this.api.getPersonalTotal
-          }?gs_flag=销售经理&now_date=2018-09-12&push_name=易蜜科
+          }?gs_flag=销售经理&now_date=2018-09-12&push_name=苗立民
 `
         )
         .then(result => {

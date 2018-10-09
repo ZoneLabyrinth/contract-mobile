@@ -34,7 +34,7 @@ export default {
   // },
   mounted(){
 
-    this.login();
+    // this.login();
   },
   methods:{
     ...mapMutations(['SET_USERINFO']),

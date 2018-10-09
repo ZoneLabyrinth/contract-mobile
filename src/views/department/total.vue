@@ -1,6 +1,6 @@
 <template>
   <div class="contract-wrapper">
-    <user-info name="王丽"></user-info>
+    <user-info name="咨询与售前支持业务部"></user-info>
     <text-panel :data="total"></text-panel>
     <text-panel :data="sum" title="累计已确认收入"></text-panel>
     <text-panel :data="balance" title="应收账款余额"></text-panel>
@@ -89,7 +89,7 @@ export default {
         .get(
           `${
             this.api.getTotal
-          }?dept_name=济南实施交付管理部&gs_flag=销售部门经理&now_date=2018-09-12&push_name=王勇`
+          }?dept_name=咨询与售前支持业务部&gs_flag=销售部门经理&now_date=2018-09-12&push_name=苗立民`
         )
         .then(result => {
           if (result.data.flag === 0) {
