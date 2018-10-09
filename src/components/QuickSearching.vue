@@ -18,7 +18,7 @@
 
 <script>
 import { Masker, XInput, Group } from "vux";
-import { clearTimeout, setTimeout } from "timers";
+import {mapGetters} from 'vuex'
 export default {
   data() {
     return {
@@ -34,10 +34,11 @@ export default {
   mounted() {
     this.getList();
   },
-
+  computed:{
+    ...mapGetters(['getSearchDate'])
+  },
   methods: {
     getList(name) {
-      // console.log(name)
       this.$emit("keyword", name);
       this.showList = false;
       this.keyword = name;
@@ -55,7 +56,7 @@ export default {
           .get(
             `${
               this.api.searchingList
-            }?ddate_td=2016年以前&push_name=苗立民&customer=${this.keyword}`
+            }?ddate_td=${this.getSearchDate}&push_name=苗立民&customer=${this.keyword}`
           )
           .then(result => {
             if (result.data.flag === 0) {
@@ -79,10 +80,7 @@ export default {
       return function() {
         var context = this,
           args = arguments;
-        console.log(context, args);
-        console.log(timer);
         clearTimeout(timer);
-        console.log(timer);
         timer = setTimeout(function() {
           method.apply(context, args);
         }, delay);

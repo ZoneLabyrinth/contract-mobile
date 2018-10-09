@@ -15,10 +15,10 @@ export default {
     return {
       isContract: true,
       contract: [
+        { url: "/department/total", name: "合计" },
         { url: "/department/normal", name: "正常合同" },
         { url: "/department/termination", name: "合同终止" },
-        { url: "/department/pause", name: "合同暂停" },
-        { url: "/department/total", name: "合计" }
+        { url: "/department/pause", name: "合同暂停" }
       ],
     };
   },

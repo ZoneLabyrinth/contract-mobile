@@ -7,6 +7,9 @@ const mutations = {
     },
     [types.SET_USERINFO](state,playload){
         state.userInfo = playload
+    },
+    [types.SET_SEARCHDATE](state,date){
+        state.searchDate = date
     }
 }
 

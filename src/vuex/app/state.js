@@ -1,5 +1,6 @@
 
 export const state = {
-    keyword:'dfas',
-    userInfo:{}
+    keyword:'',
+    userInfo:{},
+    searchDate:'2018年'
 }

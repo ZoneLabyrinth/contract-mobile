@@ -16,10 +16,10 @@ export default {
   data() {
     return {
       contract: [
-        { url: "/detail/before", name: "2016年以前" },
-        { url: "/detail/after", name: "2016年" },
+        { url: "/detail/date", name: "2018年" },
         { url: "/detail/last", name: "2017年" },
-        { url: "/detail/date", name: "2018年" }
+        { url: "/detail/after", name: "2016年" },
+        { url: "/detail/before", name: "2016年以前" }
       ],
       keyword:''
     };

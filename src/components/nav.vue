@@ -8,6 +8,7 @@
 
 <script>
 import { Tab, TabItem } from 'vux'
+import { mapMutations } from 'vuex';
 export default {
   data () {
     return {
@@ -21,8 +22,10 @@ export default {
   },  
 
   methods: {
+      ...mapMutations(['SET_SEARCHDATE']),
       OnItemClick(item){
-          this.$router.push(item.url)
+          this.$router.push(item.url),
+          this.SET_SEARCHDATE(item.name)
       }
   },
   components: {
