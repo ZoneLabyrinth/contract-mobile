@@ -38,7 +38,7 @@ export default new Router({
           component:()=>import('@/views/department/total')
         }
       ],
-      redirect:'/department/normal'
+      redirect:'/department/total'
     },
     {
       path: '/detail',
@@ -73,7 +73,7 @@ export default new Router({
           }
         }
       ],
-      redirect:'/detail/before'
+      redirect:'/detail/date'
     },
     //个人
     {
@@ -109,7 +109,7 @@ export default new Router({
           component:()=>import('@/views/personal/total')
         }
       ],
-      redirect:'/personal/normal'
+      redirect:'/personal/total'
     },
   ],
   linkActiveClass: 'active'
