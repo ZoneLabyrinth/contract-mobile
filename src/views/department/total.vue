@@ -1,6 +1,6 @@
 <template>
   <div class="contract-wrapper">
-    <user-info name="咨询与售前支持业务部"></user-info>
+    <user-info :name="dept_name"></user-info>
     <text-panel :data="total"></text-panel>
     <text-panel :data="sum" title="累计已确认收入"></text-panel>
     <text-panel :data="balance" title="应收账款余额"></text-panel>
@@ -33,6 +33,8 @@ import TextPanel from "@/components/TextPanel";
 import PiePanel from "@/components/PiePanel";
 import { rose } from "@/assets/js/pie";
 import { bar } from '@/assets/js/bar'
+import { mapGetters } from 'vuex';
+import { getQueryString } from '@/utils/filters';
 const rose1 = JSON.parse(JSON.stringify(rose))
 const rose2 = JSON.parse(JSON.stringify(rose))
 export default {
@@ -78,6 +80,12 @@ export default {
       ],
     };
   },
+  computed:{
+    ...mapGetters(['getUserInfo']),
+    dept_name(){
+      return this.getUserInfo.dept_name
+    }
+  },
 
   mounted() {
     this.getData();
@@ -89,7 +97,7 @@ export default {
         .get(
           `${
             this.api.getTotal
-          }?dept_name=咨询与售前支持业务部&gs_flag=销售部门经理&now_date=2018-09-12&push_name=苗立民`
+          }?dept_name=${this.getUserInfo.dept_name}&gs_flag=${this.getUserInfo.duty}&now_date=${getQueryString('date')}&push_name=${this.getUserInfo.name}`
         )
         .then(result => {
           if (result.data.flag === 0) {
@@ -126,7 +134,7 @@ export default {
           }
         })
         .catch(err => {});
-      this.axios.get(`${this.api.getCredit}?dept_name=济南实施交付管理部&gs_flag=销售部门经理&now_date=2018-09-12&push_name=王勇`)
+      this.axios.get(`${this.api.getCredit}?dept_name=${this.getUserInfo.dept_name}&gs_flag=${this.getUserInfo.duty}&now_date=${getQueryString('date')}&push_name=${this.getUserInfo.name}`)
         .then((result) => {
           if(result.data.flag === 0){
             let data = result.data.data;

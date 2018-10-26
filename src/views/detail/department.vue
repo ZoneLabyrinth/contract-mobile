@@ -11,10 +11,10 @@
 import UserInfo from "@/components/UserInfo";
 import CardCell from "@/components/CardCell";
 import { LoadMore } from "vux";
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      name: "苗立民",
       items: [
         { name: "销售合同号", code: "num" },
         { name: "客户", code: "cutomer" },
@@ -44,12 +44,18 @@ export default {
       default: ""
     }
   },
+  computed: {
+    ...mapGetters(["getUserInfo", "getKeyword"]),
+    name(){
+      return this.getUserInfo.name
+    }
+  },
 
   mounted() {
     this.getList();
     const _this = this;
     let el = this.$refs.content;
-    el.addEventListener("scroll",_.throttle(_this.handlerScroll, 1000));
+    el.addEventListener("scroll", _.throttle(_this.handlerScroll, 1000), true);
   },
 
   methods: {
@@ -66,11 +72,9 @@ export default {
     getList() {
       this.axios
         .get(
-          `${this.api.getDetail}?ddate_td=${
-            this.$route.meta.title
-          }&push_name=苗立民&rows=1&size=${this.page * 10}&customer=${
-            this.keyword
-          }`
+          `${this.api.getDetail}?ddate_td=${this.$route.meta.title}&push_name=${
+            this.getUserInfo.name
+          }&rows=1&size=${this.page * 10}&customer=${this.keyword}`
         )
         .then(result => {
           if (result.data.flag === 0) {

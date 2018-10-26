@@ -23,17 +23,8 @@
               <p></p>
           </div>
         </transition>
-          <!-- <transition name="fade">
-          <div class="card-demo-flex" v-if="show">
-              <p v-for="(item,index) in name" :key="index" v-if="index!==0&&index!==1">
-                <span>{{item.name}}： </span>
-                <span>{{data[item.code]}}</span>
-              </p>
-              <p></p>
-          </div>
-        </transition> -->
     </div>
-    <div slot="footer" class="card-footer"  @touchstart="handlerMore()">
+    <div slot="footer" class="card-footer"  @click="handlerMore($event)">
       <p>
           <i class="iconfont icon-z044" :style="rotate"></i>
           <span>{{show?'收起':'查看更多'}}</span>
@@ -71,7 +62,7 @@ export default {
   mounted() {},
 
   methods: {
-    handlerMore() {
+    handlerMore(e) {
       this.show = !this.show;
     },
     beforeEnter: function(el) {
@@ -108,7 +99,7 @@ export default {
   .borderRadios(0.25rem);
   box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.03);
   font-size: 0.6rem;
-  touch-action: none;
+  // touch-action: none;
   .card-demo {
     padding: 0.6rem;
     .card-demo-flex {

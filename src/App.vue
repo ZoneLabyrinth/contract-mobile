@@ -33,8 +33,7 @@ export default {
   //   AppHeader
   // },
   mounted(){
-
-    // this.login();
+    this.login();
   },
   methods:{
     ...mapMutations(['SET_USERINFO']),

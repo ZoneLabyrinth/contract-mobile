@@ -22,13 +22,14 @@ import UserInfo from "@/components/UserInfo";
 import TextPanel from "@/components/TextPanel";
 import ChartPanel from "@/components/ChartPanel";
 import { pie } from "@/assets/js/pie";
+import { mapGetters } from 'vuex';
+import { getQueryString } from '@/utils/filters'
 const pie1 = JSON.parse(JSON.stringify(pie))
 export default {
   data() {
     return {
       pie,
       pie1,
-      name: "咨询与售前支持业务部",
       conChart: [
         {name:'合同应收',value:''},
         {name:"其他",value:''}
@@ -76,6 +77,13 @@ export default {
     };
   },
 
+  computed:{
+    ...mapGetters(['getUserInfo']),
+    name(){
+      return this.getUserInfo.dept_name
+    }
+  },
+
   mounted() {
     this.getData();
   },
@@ -86,7 +94,7 @@ export default {
         .get(
           `${
             this.api.getContract
-          }?abnormal_name=${this.$route.meta.status}&gs_flag=销售部门经理&now_date=2018-09-12&push_name=苗立民`
+          }?abnormal_name=${this.$route.meta.status}&gs_flag=${this.getUserInfo.duty}&now_date=${getQueryString('date')}&push_name=${this.getUserInfo.name}`
         )
         .then(result => {
           // console.log(result);
@@ -116,14 +124,6 @@ export default {
   watch:{
     '$route'(to,from){
       if(to.path!== from.path){
-        // switch(to.meta.status){
-        //   case '0':this.getApi = this.api.getContract;
-        //   break;
-        //   case '1':this.getApi = this.api.getPause;
-        //   break;
-        //   case '2':this.getApi = this.api.getTerminal;
-        //   break;
-        // }
           this.getData();
       }
     }

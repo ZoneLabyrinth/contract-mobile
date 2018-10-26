@@ -7,10 +7,8 @@ export const formatCash = n => {
 
 export const getQueryString = name => {
     //匹配一个开头或&
-    console.log(name)
     const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
     const r = window.location.search.substr(1).match(reg);
-    console.log(window.location)
     if (r != null) {
         return unescape(r[2])
     } else {
@@ -18,3 +16,13 @@ export const getQueryString = name => {
     }
 
 }
+export const toDub = n => {
+    return n < 10 ? '0' + n : '' + n
+}
+
+const date = new Date()
+const year = date.getFullYear()
+const month = date.getMonth()
+const day = date.getDate()
+export const today = `${year}-${toDub(month + 1)}-${toDub(day)}`
+

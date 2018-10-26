@@ -18,7 +18,7 @@
 
 <script>
 import { Masker, XInput, Group } from "vux";
-import {mapGetters} from 'vuex'
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -34,8 +34,8 @@ export default {
   mounted() {
     this.getList();
   },
-  computed:{
-    ...mapGetters(['getSearchDate'])
+  computed: {
+    ...mapGetters(["getSearchDate", "getUserInfo"])
   },
   methods: {
     getList(name) {
@@ -49,14 +49,14 @@ export default {
     searchingList() {
       if (this.keyword === "") {
         this.data = [];
-        this.showList = false
+        this.showList = false;
       } else {
         this.showList = true;
         this.axios
           .get(
-            `${
-              this.api.searchingList
-            }?ddate_td=${this.getSearchDate}&push_name=苗立民&customer=${this.keyword}`
+            `${this.api.searchingList}?ddate_td=${
+              this.getSearchDate
+            }&push_name=${this.getUserInfo.name}&customer=${this.keyword}`
           )
           .then(result => {
             if (result.data.flag === 0) {
@@ -89,7 +89,7 @@ export default {
   },
 
   watch: {
-    keyword(val) { 
+    keyword(val) {
       if (val) {
         this.show = true;
       } else {

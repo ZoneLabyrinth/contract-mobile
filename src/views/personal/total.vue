@@ -1,19 +1,9 @@
 <template>
   <div class="contract-wrapper">
-    <user-info name="王丽"></user-info>
+    <user-info :name="name"></user-info>
     <text-panel :data="total"></text-panel>
     <text-panel :data="sum" title="累计已确认收入"></text-panel>
     <text-panel :data="balance" title="应收账款余额"></text-panel>
-    <!-- <pie-panel title="合同应收占比">
-      <div>
-          <e-charts :options ="rose"></e-charts>
-      </div>
-    </pie-panel>
-    <pie-panel title="权责应收占比">
-      <div>
-          <e-charts :options ="rose1"></e-charts>
-      </div>
-    </pie-panel> -->
     <pie-panel title="权责应收账款占比">
       <div>
           <e-charts :options ="rose2"></e-charts>
@@ -32,9 +22,11 @@ import UserInfo from "@/components/UserInfo";
 import TextPanel from "@/components/TextPanel";
 import PiePanel from "@/components/PiePanel";
 import { rose } from "@/assets/js/pie";
-import { bar } from '@/assets/js/bar'
-const rose1 = JSON.parse(JSON.stringify(rose))
-const rose2 = JSON.parse(JSON.stringify(rose))
+import { bar } from "@/assets/js/bar";
+import { mapGetters } from "vuex";
+import { getQueryString } from "@/utils/filters";
+const rose1 = JSON.parse(JSON.stringify(rose));
+const rose2 = JSON.parse(JSON.stringify(rose));
 export default {
   data() {
     return {
@@ -75,27 +67,32 @@ export default {
           name: "发票应收账款",
           amount: ""
         }
-      ],
+      ]
     };
   },
 
   mounted() {
     this.getData();
   },
+  computed: {
+    ...mapGetters(["getUserInfo"]),
+    name() {
+      return this.getUserInfo.name;
+    }
+  },
 
   methods: {
     getData() {
       this.axios
         .get(
-          `${
-            this.api.getPersonalTotal
-          }?gs_flag=销售经理&now_date=2018-09-12&push_name=苗立民
-`
+          `${this.api.getPersonalTotal}?gs_flag=${
+            this.getUserInfo.duty
+          }&now_date=${getQueryString('date')}&push_name=${this.getUserInfo.name}`
         )
         .then(result => {
           if (result.data.flag === 0) {
             console.log(result.data);
-            let data = result.data.data
+            let data = result.data.data;
             this.total[0].amount = data.contract;
             this.balance[0].amount = data.responsibilityList.hetong;
             this.balance[1].amount = data.responsibilityList.quanze;
@@ -104,40 +101,56 @@ export default {
             this.sum[0].amount = data.totalList.shoukuan;
             this.sum[1].amount = data.totalList.quanze;
             this.sum[2].amount = data.totalList.kaipiao;
-            
+
             //图标
-            data.conChart = _.map(data.conChart,(num)=>{
-              num.value = Number(num.value).toFixed(2)
-              return num
-            })
-            data.resChart = _.map(data.resChart,(num)=>{
-              num.value = Number(num.value).toFixed(2)
-              return num
-            })
-            data.totalChart = _.map(data.totalChart,(num)=>{
-              num.value = Number(num.value).toFixed(2)
-              return num
-            })
-            
+            data.conChart = _.map(data.conChart, num => {
+              num.value = Number(num.value).toFixed(2);
+              return num;
+            });
+            data.resChart = _.map(data.resChart, num => {
+              num.value = Number(num.value).toFixed(2);
+              return num;
+            });
+            data.totalChart = _.map(data.totalChart, num => {
+              num.value = Number(num.value).toFixed(2);
+              return num;
+            });
 
-            this.rose.series[0].data = data.conChart
-            this.rose1.series[0].data = data.resChart
-            this.rose2.series[0].data = data.totalChart
-
+            this.rose.series[0].data = data.conChart;
+            this.rose1.series[0].data = data.resChart;
+            this.rose2.series[0].data = data.totalChart;
           }
         })
         .catch(err => {});
-      this.axios.get(`${this.api.getPersonalCredit}?dept_name=济南实施交付管理部&gs_flag=销售部门经理&now_date=2018-09-12&push_name=王勇`)
-        .then((result) => {
-          if(result.data.flag === 0){
+      this.axios
+        .get(
+          `${this.api.getPersonalCredit}?dept_name=${
+            this.getUserInfo.dept_name
+          }&gs_flag=${this.getUserInfo.duty}&now_date=${getQueryString('date')}&push_name=${
+            this.getUserInfo.name
+          }`
+        )
+        .then(result => {
+          if (result.data.flag === 0) {
             let data = result.data.data;
-            this.bar.series[0].data = [data.normal.hetong,data.normal.quanze,data.normal.fapiao]
-            this.bar.series[1].data = [data.termination.hetong,data.termination.quanze,data.termination.fapiao]
-            this.bar.series[2].data = [data.pause.hetong,data.pause.quanze,data.pause.fapiao]
+            this.bar.series[0].data = [
+              data.normal.hetong,
+              data.normal.quanze,
+              data.normal.fapiao
+            ];
+            this.bar.series[1].data = [
+              data.termination.hetong,
+              data.termination.quanze,
+              data.termination.fapiao
+            ];
+            this.bar.series[2].data = [
+              data.pause.hetong,
+              data.pause.quanze,
+              data.pause.fapiao
+            ];
           }
-        }).catch((err) => {
-          
-        });
+        })
+        .catch(err => {});
     }
   },
 
