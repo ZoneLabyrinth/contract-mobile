@@ -18,4 +18,7 @@ export default {
     getPersonalTotal:'/person/total',
     getPersonalCredit:"/person/credit",
 
+    getOrg:'/contract/pkorg',
+    getDuty:'/contract/duty'
+
 }

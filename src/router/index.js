@@ -111,6 +111,12 @@ export default new Router({
       ],
       redirect:'/personal/total'
     },
+    //推送
+    {
+      path:'/receivable',
+      component:()=>import('@/views/receivable/index')
+    }
+    
   ],
   linkActiveClass: 'active'
 })

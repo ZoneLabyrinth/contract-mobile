@@ -51,7 +51,7 @@ axios.interceptors.response.use(
                     break;
                 case 500:
                     vm.$vux.toast.show({
-                        text:'服务器错误',
+                        text:'无此项数据',
                         type: 'warn'
                     })
                     break;

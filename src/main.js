@@ -13,9 +13,9 @@ import Velocity from 'velocity-animate/velocity'
 import 'velocity-animate/velocity.ui'
 
 import Echarts from "vue-echarts/components/Echarts"
-
 import 'echarts/lib/chart/pie'
 import 'echarts/theme/dark'
+
 
 import {
   ToastPlugin,
@@ -38,7 +38,7 @@ Vue.use(ConfirmPlugin)
 Vue.use(DatetimePlugin)
 
 
-Vue.component('e-charts',Echarts)
+Vue.component('e-charts', Echarts)
 
 Object.keys(filters).forEach(key => Vue.filter(key, filters[key]))
 
