@@ -94,7 +94,7 @@ export default {
         .get(
           `${
             this.api.getContract
-          }?dept_name=${this.getUserInfo.dept_name}&gs_flag=${parseDuty(this.getUserInfo.duty)}&now_date=${getQueryString('date')}&push_name=${this.getUserInfo.name}`
+          }?abnormal_name=${this.$route.meta.status}&gs_flag=${parseDuty(this.getUserInfo.duty)}&now_date=${getQueryString('date')}&push_name=${this.getUserInfo.name}`
         )
         .then(result => {
           // console.log(result);
