@@ -23,7 +23,7 @@ import TextPanel from "@/components/TextPanel";
 import ChartPanel from "@/components/ChartPanel";
 import { pie } from "@/assets/js/pie";
 import { mapGetters } from 'vuex';
-import { getQueryString } from '@/utils/filters'
+import { getQueryString,parseDuty } from '@/utils/filters'
 const pie1 = JSON.parse(JSON.stringify(pie))
 export default {
   data() {
@@ -94,7 +94,7 @@ export default {
         .get(
           `${
             this.api.getContract
-          }?abnormal_name=${this.$route.meta.status}&gs_flag=${this.getUserInfo.duty}&now_date=${getQueryString('date')}&push_name=${this.getUserInfo.name}`
+          }?dept_name=${this.getUserInfo.dept_name}&gs_flag=${parseDuty(this.getUserInfo.duty)}&now_date=${getQueryString('date')}&push_name=${this.getUserInfo.name}`
         )
         .then(result => {
           // console.log(result);

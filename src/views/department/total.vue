@@ -34,7 +34,7 @@ import PiePanel from "@/components/PiePanel";
 import { rose } from "@/assets/js/pie";
 import { bar } from '@/assets/js/bar'
 import { mapGetters } from 'vuex';
-import { getQueryString } from '@/utils/filters';
+import { getQueryString,parseDuty } from '@/utils/filters';
 const rose1 = JSON.parse(JSON.stringify(rose))
 const rose2 = JSON.parse(JSON.stringify(rose))
 export default {
@@ -97,7 +97,7 @@ export default {
         .get(
           `${
             this.api.getTotal
-          }?dept_name=${this.getUserInfo.dept_name}&gs_flag=${this.getUserInfo.duty}&now_date=${getQueryString('date')}&push_name=${this.getUserInfo.name}`
+          }?dept_name=${this.getUserInfo.dept_name}&gs_flag=${parseDuty(this.getUserInfo.duty)}&now_date=${getQueryString('date')}&push_name=${this.getUserInfo.name}`
         )
         .then(result => {
           if (result.data.flag === 0) {

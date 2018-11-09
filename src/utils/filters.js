@@ -26,3 +26,6 @@ const month = date.getMonth()
 const day = date.getDate()
 export const today = `${year}-${toDub(month + 1)}-${toDub(day)}`
 
+export const parseDuty = n =>{
+    return n.replace(/经理/,'部门经理')
+}
