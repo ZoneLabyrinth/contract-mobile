@@ -80,7 +80,7 @@ export default {
   computed:{
     ...mapGetters(['getUserInfo']),
     name(){
-      return decodeURI(escape(getQueryString('duty')))
+      return decodeURI(escape(getQueryString('dept_name')))
     }
   },
 
