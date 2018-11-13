@@ -125,9 +125,9 @@ export default {
       this.axios
         .get(
           `${this.api.getPersonalCredit}?dept_name=${
-            this.getUserInfo.dept_name
-          }&gs_flag=${this.getUserInfo.duty}&now_date=${getQueryString('date')}&push_name=${
-            this.getUserInfo.name
+            decodeURI(escape(getQueryString('dept_name')))
+          }&gs_flag=${decodeURI(escape(getQueryString('duty')))}&now_date=${getQueryString('date')}&push_name=${
+            this.getUserInfo.email
           }`
         )
         .then(result => {

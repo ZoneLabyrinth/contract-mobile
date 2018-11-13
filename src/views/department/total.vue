@@ -83,7 +83,7 @@ export default {
   computed:{
     ...mapGetters(['getUserInfo']),
     dept_name(){
-      return this.getUserInfo.dept_name
+      return decodeURI(escape(getQueryString('dept_name')))
     }
   },
 
@@ -97,12 +97,12 @@ export default {
         .get(
           `${
             this.api.getTotal
-          }?dept_name=${this.getUserInfo.dept_name}&gs_flag=${parseDuty(this.getUserInfo.duty)}&now_date=${getQueryString('date')}&push_name=${this.getUserInfo.name}`
+          }?dept_name=${decodeURI(escape(getQueryString('dept_name')))}&gs_flag=${decodeURI(escape(getQueryString('duty')))}&now_date=${getQueryString('date')}&push_name=${this.getUserInfo.name}`
         )
         .then(result => {
           if (result.data.flag === 0) {
             console.log(result.data);
-            let data = result.data.data
+            let data = result.data.data;
             this.total[0].amount = data.contract;
             this.balance[0].amount = data.responsibilityList.hetong;
             this.balance[1].amount = data.responsibilityList.quanze;
@@ -134,7 +134,7 @@ export default {
           }
         })
         .catch(err => {});
-      this.axios.get(`${this.api.getCredit}?dept_name=${this.getUserInfo.dept_name}&gs_flag=${this.getUserInfo.duty}&now_date=${getQueryString('date')}&push_name=${this.getUserInfo.name}`)
+      this.axios.get(`${this.api.getCredit}?dept_name=${getQueryString('dept_name')}&gs_flag=${this.getUserInfo.duty}&now_date=${getQueryString('date')}&push_name=${this.getUserInfo.email}`)
         .then((result) => {
           if(result.data.flag === 0){
             let data = result.data.data;

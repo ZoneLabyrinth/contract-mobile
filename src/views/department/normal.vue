@@ -80,7 +80,7 @@ export default {
   computed:{
     ...mapGetters(['getUserInfo']),
     name(){
-      return this.getUserInfo.dept_name
+      return decodeURI(escape(getQueryString('duty')))
     }
   },
 
@@ -94,10 +94,9 @@ export default {
         .get(
           `${
             this.api.getContract
-          }?abnormal_name=${this.$route.meta.status}&gs_flag=${parseDuty(this.getUserInfo.duty)}&now_date=${getQueryString('date')}&push_name=${this.getUserInfo.name}`
+          }?abnormal_name=${this.$route.meta.status}&gs_flag=${decodeURI(escape(getQueryString('duty')))}&now_date=${getQueryString('date')}&push_name=${this.getUserInfo.email}`
         )
         .then(result => {
-          // console.log(result);
           if (result.data.flag === 0) {
             let data = result.data.data
             
