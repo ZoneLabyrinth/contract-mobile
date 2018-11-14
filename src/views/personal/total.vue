@@ -124,9 +124,7 @@ export default {
         .catch(err => {});
       this.axios
         .get(
-          `${this.api.getPersonalCredit}?dept_name=${
-            decodeURI(escape(getQueryString('dept_name')))
-          }&gs_flag=${decodeURI(escape(getQueryString('duty')))}&now_date=${getQueryString('date')}&push_email=${
+          `${this.api.getPersonalCredit}?gs_flag=${decodeURI(escape(getQueryString('duty')))}&now_date=${getQueryString('date')}&push_email=${
             this.getUserInfo.email
           }`
         )
