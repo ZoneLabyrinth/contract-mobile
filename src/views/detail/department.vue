@@ -72,7 +72,7 @@ export default {
     getList() {
       this.axios
         .get(
-          `${this.api.getDetail}?ddate_td=${this.$route.meta.title}&push_name=${
+          `${this.api.getDetail}?ddate_td=${this.$route.meta.title}&push_email=${
             this.getUserInfo.email
           }&rows=1&size=${this.page * 10}&customer=${this.keyword}`
         )

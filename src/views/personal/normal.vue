@@ -93,7 +93,7 @@ export default {
         .get(
           `${
             this.api.getPersonalContract
-          }?abnormal_name=${this.$route.meta.status}&gs_flag=${decodeURI(escape(getQueryString('duty')))}&now_date=${getQueryString('date')}&push_name=${this.getUserInfo.email}`
+          }?abnormal_name=${this.$route.meta.status}&gs_flag=${decodeURI(escape(getQueryString('duty')))}&now_date=${getQueryString('date')}&push_email=${this.getUserInfo.email}`
         )
         .then(result => {
           // console.log(result);

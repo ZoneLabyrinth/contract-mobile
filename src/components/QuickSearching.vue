@@ -56,7 +56,7 @@ export default {
           .get(
             `${this.api.searchingList}?ddate_td=${
               this.getSearchDate
-            }&push_name=${this.getUserInfo.email}&customer=${this.keyword}`
+            }&push_email=${this.getUserInfo.email}&customer=${this.keyword}`
           )
           .then(result => {
             if (result.data.flag === 0) {

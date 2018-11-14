@@ -87,7 +87,7 @@ export default {
         .get(
           `${this.api.getPersonalTotal}?gs_flag=${
             this.getUserInfo.duty
-          }&now_date=${getQueryString('date')}&push_name=${this.getUserInfo.email}`
+          }&now_date=${getQueryString('date')}&push_email=${this.getUserInfo.email}`
         )
         .then(result => {
           if (result.data.flag === 0) {
@@ -126,7 +126,7 @@ export default {
         .get(
           `${this.api.getPersonalCredit}?dept_name=${
             decodeURI(escape(getQueryString('dept_name')))
-          }&gs_flag=${decodeURI(escape(getQueryString('duty')))}&now_date=${getQueryString('date')}&push_name=${
+          }&gs_flag=${decodeURI(escape(getQueryString('duty')))}&now_date=${getQueryString('date')}&push_email=${
             this.getUserInfo.email
           }`
         )

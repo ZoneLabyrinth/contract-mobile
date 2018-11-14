@@ -97,7 +97,7 @@ export default {
         .get(
           `${
             this.api.getTotal
-          }?dept_name=${decodeURI(escape(getQueryString('dept_name')))}&gs_flag=${decodeURI(escape(getQueryString('duty')))}&now_date=${getQueryString('date')}&push_name=${this.getUserInfo.name}`
+          }?dept_name=${decodeURI(escape(getQueryString('dept_name')))}&gs_flag=${decodeURI(escape(getQueryString('duty')))}&now_date=${getQueryString('date')}&push_email=${this.getUserInfo.email}`
         )
         .then(result => {
           if (result.data.flag === 0) {
@@ -134,7 +134,7 @@ export default {
           }
         })
         .catch(err => {});
-      this.axios.get(`${this.api.getCredit}?dept_name=${getQueryString('dept_name')}&gs_flag=${this.getUserInfo.duty}&now_date=${getQueryString('date')}&push_name=${this.getUserInfo.email}`)
+      this.axios.get(`${this.api.getCredit}?dept_name=${getQueryString('dept_name')}&gs_flag=${this.getUserInfo.duty}&now_date=${getQueryString('date')}&push_email=${this.getUserInfo.email}`)
         .then((result) => {
           if(result.data.flag === 0){
             let data = result.data.data;
