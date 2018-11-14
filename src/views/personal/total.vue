@@ -87,7 +87,7 @@ export default {
         .get(
           `${this.api.getPersonalTotal}?gs_flag=${
             this.getUserInfo.duty
-          }&now_date=${getQueryString('date')}&push_name=${this.getUserInfo.name}`
+          }&now_date=${getQueryString('date')}&push_name=${this.getUserInfo.email}`
         )
         .then(result => {
           if (result.data.flag === 0) {

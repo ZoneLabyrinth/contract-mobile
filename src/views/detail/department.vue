@@ -73,7 +73,7 @@ export default {
       this.axios
         .get(
           `${this.api.getDetail}?ddate_td=${this.$route.meta.title}&push_name=${
-            this.getUserInfo.name
+            this.getUserInfo.email
           }&rows=1&size=${this.page * 10}&customer=${this.keyword}`
         )
         .then(result => {
