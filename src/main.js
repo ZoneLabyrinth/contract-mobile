@@ -21,7 +21,7 @@ import {
   ToastPlugin,
   LoadingPlugin,
   ConfirmPlugin,
-  DatetimePlugin
+  DatetimePlugin,
 } from 'vux'
 
 

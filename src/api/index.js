@@ -1,24 +1,25 @@
 export default {
     //获取用户
-    getUser:'/contract/getUserInfo',
+    getUser: '/contract/getUserInfo',
 
     //明细
-    getDetail:'/details/department',
-    searchingList:'/details/search',
+    getDetail: '/details/department',
+    searchingList: '/details/search',
     //部门合同
-    getContract:'/department/contract',
+    getContract: '/department/contract',
     // getPause:'/department/contract/pause',
     // getTerminal:'/department/contract/termination',
-    getTotal:'/department/total',
-    getCredit:"/department/credit",
+    getTotal: '/department/total',
+    getCredit: "/department/credit",
     // 个人
-    getPersonalContract:'/manager/contract',
+    getPersonalContract: '/manager/contract',
     // getPersonPause:'/manager/contract/pause',
     // getPersonTerminal:'/manager/contract/termination',
-    getPersonalTotal:'/person/total',
-    getPersonalCredit:"/person/credit",
+    getPersonalTotal: '/person/total',
+    getPersonalCredit: "/person/credit",
 
-    getOrg:'/contract/pkorg',
-    getDuty:'/contract/duty'
+    getOrg: '/contract/pkorg',
+    getDuty: '/contract/duty',
+    receivable: '/contract/receivable'
 
 }
