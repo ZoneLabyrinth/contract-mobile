@@ -83,7 +83,7 @@ export default {
   computed:{
     ...mapGetters(['getUserInfo']),
     name(){
-      return this.getUserInfo.name
+      return `${this.getUserInfo.name}(${decodeURI(escape(getQueryString('duty')))})`
     }
   },
 
