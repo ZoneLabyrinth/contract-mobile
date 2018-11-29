@@ -6,22 +6,22 @@
     <text-panel :data="balance" title="应收账款余额"></text-panel>
     <pie-panel title="合同应收占比">
       <div>
-          <e-charts :options ="rose"></e-charts>
+          <chart :options ="rose"></chart>
       </div>
     </pie-panel>
     <pie-panel title="权责应收占比">
       <div>
-          <e-charts :options ="rose1"></e-charts>
+          <chart :options ="rose1"></chart>
       </div>
     </pie-panel>
     <pie-panel title="权责应收账款占比">
       <div>
-          <e-charts :options ="rose2"></e-charts>
+          <chart :options ="rose2"></chart>
       </div>
     </pie-panel>
     <pie-panel title="应收账款余额比重">
       <div>
-          <e-charts :options ="bar"></e-charts>
+          <chart :options ="bar"></chart>
       </div>
     </pie-panel>
   </div>
@@ -31,6 +31,7 @@
 import UserInfo from "@/components/UserInfo";
 import TextPanel from "@/components/TextPanel";
 import PiePanel from "@/components/PiePanel";
+import Chart from '@/components/Chart'
 import { rose } from "@/assets/js/pie";
 import { bar } from '@/assets/js/bar'
 import { mapGetters } from 'vuex';
@@ -151,7 +152,8 @@ export default {
   components: {
     UserInfo,
     TextPanel,
-    PiePanel
+    PiePanel,
+    Chart
   }
 };
 </script>

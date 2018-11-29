@@ -5,13 +5,13 @@
     <text-panel :data="sum" title="累计已确认收入"></text-panel>
     <text-panel :data="balance" title="应收账款余额"></text-panel>
     <pie-panel title="权责应收账款占比">
-      <div>
-          <e-charts :options ="rose2"></e-charts>
+      <div class="echarts">
+          <chart :options ="rose2"></chart>
       </div>
     </pie-panel>
     <pie-panel title="应收账款余额比重">
-      <div>
-          <e-charts :options ="bar"></e-charts>
+      <div class="echarts">
+          <chart :options ="bar"></chart>
       </div>
     </pie-panel>
   </div>
@@ -21,6 +21,7 @@
 import UserInfo from "@/components/UserInfo";
 import TextPanel from "@/components/TextPanel";
 import PiePanel from "@/components/PiePanel";
+import Chart from '@/components/Chart'
 import { rose } from "@/assets/js/pie";
 import { bar } from "@/assets/js/bar";
 import { mapGetters } from "vuex";
@@ -86,7 +87,7 @@ export default {
       this.axios
         .get(
           `${this.api.getPersonalTotal}?gs_flag=${
-            this.getUserInfo.duty
+            decodeURI(escape(getQueryString('duty')))
           }&now_date=${getQueryString('date')}&push_email=${this.getUserInfo.email}`
         )
         .then(result => {
@@ -155,7 +156,8 @@ export default {
   components: {
     UserInfo,
     TextPanel,
-    PiePanel
+    PiePanel,
+    Chart
   }
 };
 </script>

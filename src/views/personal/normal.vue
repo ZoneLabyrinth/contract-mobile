@@ -3,14 +3,14 @@
     <user-info :name="name"></user-info>
      <text-panel :data="contract" >
        <div slot="chart">
-         <e-charts :options="pie"></e-charts>
+         <chart :options="pie"></chart>
        </div>
      </text-panel>
      <chart-panel :data="receivables" showChart title="应收账款余额占合同金额比重">
      </chart-panel>
      <text-panel title="权责预收占合同金额比重" :data="response">
        <div slot="chart">
-         <e-charts :options="pie1"></e-charts>
+         <chart :options="pie1"></chart>
        </div>
      </text-panel>
 
@@ -21,6 +21,7 @@
 import UserInfo from "@/components/UserInfo";
 import TextPanel from "@/components/TextPanel";
 import ChartPanel from "@/components/ChartPanel";
+import Chart from '@/components/Chart'
 import { pie } from "@/assets/js/pie";
 import { mapGetters } from 'vuex';
 import { getQueryString } from '@/utils/filters'
@@ -132,7 +133,8 @@ export default {
   components: {
     UserInfo,
     TextPanel,
-    ChartPanel
+    ChartPanel,
+    Chart
   }
 };
 </script>

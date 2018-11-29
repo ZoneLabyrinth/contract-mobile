@@ -8,7 +8,7 @@
              <span>{{item.amount | formatCash}}</span> 
              <span>{{item.name}}</span>
              <span v-if="showChart">
-               <e-charts :options="chart[index]"></e-charts>
+               <chart :options="chart[index]"></chart>
              </span>
              <!-- <span v-if="showChart">
                {{item.title}}
@@ -22,6 +22,7 @@
 
 <script>
 import { pie } from "@/assets/js/pie.js";
+import Chart from '@/components/Chart'
 const pie1 = JSON.parse(JSON.stringify(pie));
 const pie2 = JSON.parse(JSON.stringify(pie));
 const pie3 = JSON.parse(JSON.stringify(pie));
@@ -105,7 +106,7 @@ export default {
     }
   },
 
-  components: {}
+  components: {Chart}
 };
 </script>
 <style lang='less' scoped>

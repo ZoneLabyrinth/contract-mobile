@@ -12,7 +12,8 @@ import api from '@/api/index.js'
 import Velocity from 'velocity-animate/velocity'
 import 'velocity-animate/velocity.ui'
 
-import Echarts from "vue-echarts/components/Echarts"
+import ECharts from 'echarts'
+// import Echarts from "vue-echarts/components/Echarts"
 import 'echarts/lib/chart/pie'
 import 'echarts/theme/dark'
 
@@ -29,6 +30,7 @@ FastClick.attach(document.body)
 Vue.config.productionTip = false
 Vue.prototype.axios = axios
 Vue.prototype.api = api
+Vue.prototype.$echarts = ECharts
 window.Velocity = Velocity
 
 //默认使用vux组件
@@ -38,7 +40,7 @@ Vue.use(ConfirmPlugin)
 Vue.use(DatetimePlugin)
 
 
-Vue.component('e-charts', Echarts)
+// Vue.component('e-charts', Echarts)
 
 Object.keys(filters).forEach(key => Vue.filter(key, filters[key]))
 
